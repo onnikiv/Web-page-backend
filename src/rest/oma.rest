@@ -1,0 +1,27 @@
+
+### kaikki haku tokenilla
+GET https://x/assignments/api/v1/cats
+Authorization: Bearer <TOKEN>
+Accept: application/json
+
+
+### testi lisätään ukko
+POST https://x/assignments/api/v1/users
+Content-Type: application/json
+
+{
+  "name": "jorma",
+  "username": "jorma12",
+  "password": "salasana",
+  "email": "jorma@example.com"
+}
+
+### loggaus
+POST https://x/assignments/api/v1/auth/login
+Content-Type: application/json
+Accept: application/json
+
+{
+  "username": "jorma12",
+  "password": "salasana"
+}

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kissakuvan upload test</title>
+  </head>
+  <body>
+    <form
+      method="post"
+      action="http://localhost:3001/api/v1/cats"
+      enctype="multipart/form-data"
+    >
+      <input type="text" name="cat_name" />
+      <input type="file" name="file" />
+      <button type="submit">Lähetä kissa</button>
+    </form>
+  </body>
+</html>
