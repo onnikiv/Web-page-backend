@@ -1,14 +1,14 @@
 ### Login oikealla salasanalla
-POST http://localhost:3001/api/v1/auth/login
+POST http://localhost:3000/api/v1/auth/login
 Content-Type: application/json
 
 {
-  "username": "johndoe",
-  "password": "password123"
+  "username": "testi",
+  "password": "testi"
 }
 
 ### Login väärällä salasanalla
-POST http://localhost:3001/api/v1/auth/login
+POST http://localhost:3000/api/v1/auth/login
 Content-Type: application/json
 
 {
@@ -17,7 +17,7 @@ Content-Type: application/json
 }
 
 ### Post login
-POST http://localhost:3001/api/v1/auth/login
+POST http://localhost:3000/api/v1/auth/login
 Content-Type: application/json
 
 {
@@ -26,6 +26,5 @@ Content-Type: application/json
 }
 
 ### Get my user info
-GET http://localhost:3001/api/v1/auth/me
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjozOSwibmFtZSI6IkpvaG4gRG9lIiwidXNlcm5hbWUiOiJqb2huZG9lIiwiZW1haWwiOiJqb2huZG9lQGV4YW1wbGUuY29tIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3NDM3NzMzODEsImV4cCI6MTc0Mzg1OTc4MX0.2_9xYPbARzQRR62rLr9mjGJcIPslf8Ih2ayqAiGqIPU
-
+GET http://localhost:3000/api/v1/auth/me
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo1NCwibmFtZSI6InRlc3RpIiwidXNlcm5hbWUiOiJ0ZXN0aSIsImVtYWlsIjoidGVzdGlAZXhhbXBsZS5jb20iLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NDU0MjU1MiwiZXhwIjoxNzQ0NjI4OTUyfQ.34PIRO22H_295-gs3RCg9Zg94pnTe83sO_tubfyYBLM
