@@ -1,3 +1,5 @@
+import bcrypt from 'bcrypt';
+import {validationResult} from 'express-validator';
 import {
   listAllUsers,
   findUserById,
@@ -6,48 +8,79 @@ import {
   removeUser,
 } from '../models/user-model.js';
 
-import bcrypt from 'bcrypt';
-
-const getUser = async (req, res) => {
-  res.json(await listAllUsers());
-};
-
-const getUserById = async (req, res) => {
-  const user = await findUserById(req.params.id);
-  if (user) {
-    res.json(user);
-  } else {
-    res.sendStatus(404);
+const getUser = async (req, res, next) => {
+  try {
+    const users = await listAllUsers();
+    res.json(users);
+  } catch (error) {
+    next(error);
   }
 };
 
-const postUser = async (req, res) => {
-  req.body.password = bcrypt.hashSync(req.body.password, 10);
-  const result = await addUser(req.body);
-  if (result.user_id) {
-    res.status(201);
-    res.json(result);
-  } else {
-    res.sendStatus(400);
-  }
-};
-const putUser = async (req, res) => {
-  const result = await modifyUser(req.body, req.params.id);
-  if (result.message) {
-    res.status(200);
-    res.json(result);
-  } else {
-    res.sendStatus(400);
+const getUserById = async (req, res, next) => {
+  try {
+    const user = await findUserById(req.params.id);
+    if (user) {
+      res.json(user);
+    } else {
+      const error = new Error('User not found');
+      error.status = 404;
+      next(error);
+    }
+  } catch (error) {
+    next(error);
   }
 };
 
-const deleteUser = async (req, res) => {
-  const result = await removeUser(req.params.id);
-  if (result.message) {
-    res.status(200);
-    res.json(result);
-  } else {
-    res.sendStatus(400);
+const postUser = async (req, res, next) => {
+  try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      const error = new Error('Invalid or missing fields');
+      error.status = 400;
+      return next(error);
+    }
+
+    req.body.password = bcrypt.hashSync(req.body.password, 10);
+    const result = await addUser(req.body);
+    if (result.user_id) {
+      res.status(201).json(result);
+    } else {
+      const error = new Error('Failed to add user');
+      error.status = 400;
+      next(error);
+    }
+  } catch (error) {
+    next(error);
+  }
+};
+const putUser = async (req, res, next) => {
+  try {
+    const result = await modifyUser(req.body, req.params.id);
+    if (result.message) {
+      res.status(200).json(result);
+    } else {
+      const error = new Error('Failed to update user');
+      error.status = 400;
+      next(error);
+    }
+  } catch (error) {
+    next(error);
+  }
+};
+
+const deleteUser = async (req, res, next) => {
+  try {
+    const result = await removeUser(req.params.id);
+    if (result.message) {
+      res.status(200).json(result);
+    } else {
+      const error = new Error('Failed to delete user');
+      error.status = 400;
+      next(error);
+    }
+  } catch (error) {
+    next(error);
   }
 };
 
