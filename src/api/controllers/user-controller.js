@@ -71,14 +71,10 @@ const putUser = async (req, res, next) => {
 
 const deleteUser = async (req, res, next) => {
   try {
-    console.log(req.locals, ' req');
-    console.log(res.locals, ' res');
-    console.log('deleteUser: ', res.locals.user); // Use res.locals.user instead of req.user
-    if (
-      res.locals.user.role !== 'admin' &&
-      res.locals.user.id !== parseInt(req.params.id, 10)
-    ) {
-      const error = new Error('Unauthorized to delete this user');
+    if (res.locals.user.role !== 'admin') {
+      const error = new Error(
+        'Only admins are authorized to delete users currently'
+      );
       error.status = 403;
       return next(error);
     }
