@@ -22,7 +22,7 @@ const findThumbnailByUserId = async (id) => {
 const addThumbnail = async (thumbnail) => {
   const {user_id, filename} = thumbnail;
   const sql = `INSERT INTO wsk_thumbnails (user, filename) VALUES (?, ?)`;
-  const params = [user_id, filename + '_thumb'];
+  const params = [user_id, filename + '_thumb.jpg'];
   const [rows] = await promisePool.execute(sql, params);
   console.log('rows', rows);
   if (rows.affectedRows === 0) {

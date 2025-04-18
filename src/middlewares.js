@@ -9,9 +9,9 @@ const createThumbnail = async (req, res, next) => {
   }
 
   let extension = 'jpg';
-  if (req.file.mimetype === 'image/png') {
-    extension = 'png';
-  }
+  // if (req.file.mimetype === 'image/png') {
+  //   extension = 'png';
+  // }
   // muutetaan tiedoston kokoa
   await sharp(req.file.path)
     .resize(100, 100)
