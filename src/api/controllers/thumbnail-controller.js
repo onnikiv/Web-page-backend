@@ -15,13 +15,14 @@ const getThumbnails = async (req, res, next) => {
   }
 };
 
-const getThumbnailById = async (req, res, next) => {
+const getThumbnailByUserId = async (req, res, next) => {
   try {
-    const thumbnail = await findThumbnailByUserId(req.params.id);
+    const userId = req.params.id;
+    const thumbnail = await findThumbnailByUserId(userId);
     if (thumbnail) {
       res.json(thumbnail);
     } else {
-      const error = new Error('Thumbnail not found');
+      const error = new Error('Thumbnail not found for the given user');
       error.status = 404;
       next(error);
     }
@@ -86,7 +87,7 @@ const deleteThumbnail = async (req, res, next) => {
 
 export {
   getThumbnails,
-  getThumbnailById,
+  getThumbnailByUserId,
   postThumbnail,
   putThumbnail,
   deleteThumbnail,
