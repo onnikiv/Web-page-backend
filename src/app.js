@@ -15,7 +15,7 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
-app.use('/public', express.static('public'));
+app.use('/uploads', express.static('public'));
 
 app.get('/', (req, res) => {
   res.send('WEBPAGE REST API');
