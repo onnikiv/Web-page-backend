@@ -3,7 +3,7 @@ import express from 'express';
 import multer from 'multer';
 import {
   deleteThumbnail,
-  getThumbnailById,
+  getThumbnailByUserId,
   getThumbnails,
   postThumbnail,
   putThumbnail,
@@ -11,7 +11,7 @@ import {
 
 const thumbnailRouter = express.Router();
 
-const upload = multer({dest: 'public/'});
+const upload = multer({dest: 'uploads/'});
 
 thumbnailRouter
   .route('/')
@@ -20,7 +20,7 @@ thumbnailRouter
 
 thumbnailRouter
   .route('/:id')
-  .get(getThumbnailById)
+  .get(getThumbnailByUserId)
   .put(putThumbnail)
   .delete(deleteThumbnail);
 
