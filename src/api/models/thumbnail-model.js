@@ -10,10 +10,9 @@ const listAllThumbnails = async () => {
 
 const findThumbnailByUserId = async (id) => {
   const [rows] = await promisePool.execute(
-    'SELECT wsk_thumbnails.*, wsk_users.name as "user" FROM wsk_thumbnails JOIN wsk_users ON wsk_thumbnails.user = wsk_users.user_id WHERE img_id = ?',
+    'SELECT wsk_thumbnails.*, wsk_users.name as "user" FROM wsk_thumbnails JOIN wsk_users ON wsk_thumbnails.user = wsk_users.user_id WHERE wsk_thumbnails.user = ?',
     [id]
   );
-  console.log('rows', rows);
   if (rows.length === 0) {
     return false;
   }
@@ -23,7 +22,7 @@ const findThumbnailByUserId = async (id) => {
 const addThumbnail = async (thumbnail) => {
   const {user_id, filename} = thumbnail;
   const sql = `INSERT INTO wsk_thumbnails (user, filename) VALUES (?, ?)`;
-  const params = [user_id, filename + '_thumb.png'];
+  const params = [user_id, filename + '_thumb'];
   const [rows] = await promisePool.execute(sql, params);
   console.log('rows', rows);
   if (rows.affectedRows === 0) {
