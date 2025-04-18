@@ -22,8 +22,8 @@ const findThumbnailByUserId = async (id) => {
 
 const addThumbnail = async (thumbnail) => {
   const {user_id, filename} = thumbnail;
-  const sql = `INSERT INTO wsk_thumbnails (user,filename) VALUES (?, ?)`;
-  const params = [user_id, filename];
+  const sql = `INSERT INTO wsk_thumbnails (user, filename) VALUES (?, ?)`;
+  const params = [user_id, filename + '_thumb.png'];
   const [rows] = await promisePool.execute(sql, params);
   console.log('rows', rows);
   if (rows.affectedRows === 0) {
@@ -37,12 +37,12 @@ const modifyThumbnail = async (thumbnail, id) => {
     `UPDATE wsk_thumbnails SET ? WHERE img_id = ?`,
     [thumbnail, id]
   );
-  const rows = await promisePool.execute(sql);
+  const [rows] = await promisePool.execute(sql);
   console.log('rows', rows);
-  if (rows[0].affectedRows === 0) {
+  if (rows.affectedRows === 0) {
     return false;
   }
-  return {message: 'success'};
+  return {message: 'Thumbnail updated successfully'};
 };
 
 const removeThumbnail = async (id) => {

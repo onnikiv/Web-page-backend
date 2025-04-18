@@ -55,6 +55,7 @@ const postThumbnail = async (req, res, next) => {
 
 const putThumbnail = async (req, res, next) => {
   try {
+    console.log(req.body, req.params.id);
     const result = await modifyThumbnail(req.body, req.params.id);
     if (result.message) {
       res.status(200).json(result);

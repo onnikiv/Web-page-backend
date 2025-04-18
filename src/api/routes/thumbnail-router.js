@@ -11,7 +11,7 @@ import {
 
 const thumbnailRouter = express.Router();
 
-const upload = multer({dest: 'uploads/'});
+const upload = multer({dest: 'public/'});
 
 thumbnailRouter
   .route('/')

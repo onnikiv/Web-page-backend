@@ -12,10 +12,14 @@ const createThumbnail = async (req, res, next) => {
   if (req.file.mimetype === 'image/png') {
     extension = 'png';
   }
-
+  // muutetaan tiedoston kokoa
   await sharp(req.file.path)
     .resize(100, 100)
     .toFile(`${req.file.path}_thumb.${extension}`);
+
+  // poistetaan lopuksi alkuperäinen tiedosto säästämään tilaa
+  const fs = await import('fs/promises');
+  await fs.unlink(req.file.path);
 
   next();
 };
