@@ -28,7 +28,24 @@ const findFavouriteByUserId = async (id) => {
   if (rows.length === 0) {
     return false;
   }
-  return rows[0];
+  return rows;
 };
 
-export {listAllFavourites, addFavourite, findFavouriteByUserId};
+const removeFavourite = async (user_id, restaurantid) => {
+  const [rows] = await promisePool.execute(
+    'DELETE FROM wsk_favourites WHERE user = ? AND restaurantid = ?',
+    [user_id, restaurantid]
+  );
+  console.log('rows', rows);
+  if (rows.affectedRows === 0) {
+    return false;
+  }
+  return {message: 'success'};
+};
+
+export {
+  listAllFavourites,
+  addFavourite,
+  findFavouriteByUserId,
+  removeFavourite,
+};
