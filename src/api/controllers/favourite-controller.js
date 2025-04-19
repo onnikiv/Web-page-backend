@@ -17,8 +17,10 @@ const postFavourite = async (req, res, next) => {
   try {
     const {user_id, restaurantid} = req.body;
 
+    console.log(req.body);
+
     if (!user_id || !restaurantid) {
-      return res.status(400).json({error: 'Missing user_id or restaurantid'});
+      return res.status(400).json({error: 'Missing user_id or restaurant_id'});
     }
 
     const result = await addFavourite({user_id, restaurantid});
