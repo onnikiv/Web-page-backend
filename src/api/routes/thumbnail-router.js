@@ -1,4 +1,4 @@
-import {createThumbnail} from '../../middlewares.js';
+import {authenticateToken, createThumbnail} from '../../middlewares.js';
 import express from 'express';
 import multer from 'multer';
 import {
@@ -21,7 +21,7 @@ thumbnailRouter
 thumbnailRouter
   .route('/:id')
   .get(getThumbnailByUserId)
-  .put(putThumbnail)
-  .delete(deleteThumbnail);
+  .put(authenticateToken, putThumbnail)
+  .delete(authenticateToken, deleteThumbnail);
 
 export default thumbnailRouter;
