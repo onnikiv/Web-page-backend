@@ -1,8 +1,12 @@
 # Web Page Backend
 
-## Server Information
+This project is part of the `wsk-web-development` course. The goal is to create a functional backend server that supports a web application fetching and displaying weekly and daily menus from various student restaurants. The backend is designed to handle data inconsistencies and errors gracefully while providing a robust API for the frontend.
 
-The backend server for this project is accessible at [http://10.120.32.69/web-page](http://10.120.32.69/web-page).
+## ⭐ Deployment and Server Information
+
+The backend server for this project is accessible at [http://10.120.32.69/web-page](http://10.120.32.69/web-page). Note that the server does not have SSL authentication, so accessing it may require bypassing browser security warnings (e.g., using `thisisunsafe` in Chrome).
+
+For more information about the frontend, visit the [frontend repository](https://github.com/onnikiv/Web-page-frontend/tree/main).
 
 **Note:** The server does not have SSL authentication, so accessing it may require bypassing browser security warnings (e.g., using `thisisunsafe` in Chrome).
 
