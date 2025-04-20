@@ -56,12 +56,40 @@ const postUser = async (req, res, next) => {
 };
 const putUser = async (req, res, next) => {
   try {
-    const result = await modifyUser(req.body, req.params.id);
-    if (result.message) {
-      res.status(200).json(result);
-    } else {
-      const error = new Error('Failed to update user');
+    const {currentPassword, newPassword} = req.body;
+
+    if (!currentPassword || !newPassword) {
+      const error = new Error('Missing currentPassword or newPassword');
       error.status = 400;
+      return next(error);
+    }
+
+    const user = await findUserById(req.params.id);
+    if (!user) {
+      const error = new Error('User not found');
+      error.status = 404;
+      return next(error);
+    }
+
+    const isPasswordValid = await bcrypt.compare(
+      currentPassword,
+      user.password
+    );
+    if (!isPasswordValid) {
+      const error = new Error('Current password is incorrect');
+      error.status = 401;
+      return next(error);
+    }
+
+    const hashedPassword = bcrypt.hashSync(newPassword, 10);
+
+    const result = await modifyUser({password: hashedPassword}, req.params.id);
+
+    if (result.message) {
+      res.status(200).json({message: 'Password updated successfully'});
+    } else {
+      const error = new Error('Failed to update password');
+      error.status = 500;
       next(error);
     }
   } catch (error) {
