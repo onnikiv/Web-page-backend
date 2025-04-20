@@ -54,6 +54,8 @@ const postUser = async (req, res, next) => {
     next(error);
   }
 };
+
+// atm pystyy vaan salasanan vaihtaa
 const putUser = async (req, res, next) => {
   try {
     const {currentPassword, newPassword} = req.body;

@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-undef */
 import sharp from 'sharp';
 import jwt from 'jsonwebtoken';
 import 'dotenv/config';
@@ -32,10 +34,8 @@ const authenticateToken = (req, res, next) => {
     return res.sendStatus(401);
   }
   try {
-    // eslint-disable-next-line no-undef
     res.locals.user = jwt.verify(token, process.env.JWT_SECRET);
     next();
-    // eslint-disable-next-line no-unused-vars
   } catch (err) {
     res.status(403).send({message: 'invalid token'});
   }
@@ -47,7 +47,6 @@ const notFoundHandler = (req, res, next) => {
   next(error);
 };
 
-// eslint-disable-next-line no-unused-vars
 const errorHandler = (err, req, res, next) => {
   res.status(err.status || 500);
   res.json({

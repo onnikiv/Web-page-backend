@@ -1,5 +1,4 @@
 import express from 'express';
-//import {authenticateToken} from '../../middlewares.js';
 import {
   deleteFavourite,
   getFavouritesByUserId,
